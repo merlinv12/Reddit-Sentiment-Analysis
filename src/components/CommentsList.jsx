@@ -24,6 +24,7 @@ const CommentsList = props => {
         <Table size="small">
           <TableHead>
             <TableRow>
+              <TableCell>Your Rating</TableCell>
               <TableCell>Comment</TableCell>
               <TableCell align="right">Sub Reddit</TableCell>
               <TableCell align="right">Negative</TableCell>

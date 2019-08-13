@@ -57,10 +57,17 @@ class RedditComments extends React.Component {
           <h2>Sentiment Analysis on Reddit Comments</h2>
           <p><b>How This Works:</b></p>
           <p>
-            1. Enter a Reddit Username in the search bar and click Analyze. <br></br>
-            2. The app will retreive 10 comments from this user and perform sentiment analysis using Vader, then return the data in a table. <br></br>
-            3. Click the Toxic Icon if you think the comment is negative, or the happy face icon if you think the comment is postive.
+            1.  Enter a Reddit Username in the search bar and click Analyze. <br></br>
+            2.  The app will retreive 10 comments from this user and perform sentiment analysis using <span><a href="https://github.com/cjhutto/vaderSentiment">VADER</a></span>, and then return the data in a table.<br></br>
+            3.  Click the Toxic Icon if you think the comment is negative, or the happy face icon if you think the comment is postive.<br></br>
           </p>
+          <p><b>Why?</b></p>
+          <p>
+            VADER is an effective rule based sentiment analysis model, but you can see there are limitations and the results might <br></br>
+            not be accurate.  By labeling these comments, especially the ones that are not accurate, you are helping create a dataset <br></br>
+            can be used to train a machine learning based sentiment classifier.
+          </p>
+
         </TextArea>
         <SearchBar>
         <TextField
