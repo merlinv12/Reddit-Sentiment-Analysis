@@ -3,6 +3,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableRow from '@material-ui/core/TableRow';
 import Button from '@material-ui/core/Button';
+import "@babel/polyfill";
 import styled from 'styled-components';
 
 
@@ -35,7 +36,7 @@ border-radius: 15px;
 
 
 const updateComment = function(id, val){
-    axios.put(`/api/comment/${id}`, {
+    axios.put(`/api/comments/${id}`, {
         [val]: this.state.val  
     })
     .then(res => console.log(res))
@@ -53,8 +54,15 @@ class Comment extends React.Component{
         this.posClick = this.posClick.bind(this);
     }
 
-    compnentDidUpdate(){
-        axios.put(`/api/comment/${this.state.reddit_id}`, {
+    async posClick(){
+        // console.log(this.state.positive)
+        if (this.state.positive === null){
+           await this.setState({positive: true})
+        } else {
+            await this.setState(prevState => ({positive: !prevState.positive}));
+        }
+
+        axios.put(`/api/comments/${this.state.reddit_id}`, {
             positive: this.state.positive,
             toxic: this.state.toxic
         })
@@ -62,21 +70,19 @@ class Comment extends React.Component{
         .catch(err => console.log(err))
     }
 
-    posClick(){
-        // console.log(this.state.positive)
-        if (this.state.positive === null){
-            this.setState({positive: true})
-        } else {
-            this.setState(prevState => ({positive: !prevState.positive}));
-        }
-    }
-
-    toxClick(){
+    async toxClick(){
         if (this.state.toxic === null){
-            this.setState({toxic: true})
+            await this.setState({toxic: true})
         } else {
-            this.setState(prevState => ({toxic: !prevState.toxic}));
+            await this.setState(prevState => ({toxic: !prevState.toxic}));
         }
+
+        axios.put(`/api/comment/${this.state.reddit_id}`, {
+            positive: this.state.positive,
+            toxic: this.state.toxic
+        })
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
     }
 
     render(){
